@@ -1,0 +1,10 @@
+﻿#resetconfirmbtn {
+    padding: 4px 10px 4px 10px;
+    color: seagreen;
+    margin-top: 12px;
+}
+
+#resetconfirmationerror{
+    color: darkred;
+    margin: 5px;
+}

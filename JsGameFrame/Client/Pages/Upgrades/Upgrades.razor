@@ -1,0 +1,60 @@
+﻿@namespace Idlebar.Client.Pages
+@inherits PageBase
+
+<div class="g_content @Class">
+
+    <div align="center">
+        <ProgressButton ButtonId="progressButton2" BarId="progressButtonBar2">
+            <i class="fas fa-plus-circle" />
+        </ProgressButton>
+        <button id="multibutton" class="prettybuttons"></button>
+    </div>
+
+    <FlexArea Id="upgradesbox" Center="true">
+        <FlexBox Size="550px" Id="lvlupgbox">
+            Level Upgrades
+            <div><span id="tabtext_level" class="stat_pr black">0</span><span id="tabtext_tier" class="stat_pr black">0</span></div>
+            <LevelUpgrade Id="0" />
+            <LevelUpgrade Id="1" />
+            <LevelUpgrade Id="2" />
+            <LevelUpgrade Id="3" />
+            <LevelUpgrade Id="4" />
+        </FlexBox>
+        <FlexBox Size="550px" Id="enupgbox">
+            <div>
+                <img src="up/up_energy.png" alt="Energy" width="5%">
+                Energy Upgrades
+            </div>
+            <span id="tabvenergy" class="stat_pr">Unlocked at tier 10k</span>
+            <EnergyUpgrade Id="0" />
+            <EnergyUpgrade Id="1" />
+            <EnergyUpgrade Id="2" />
+            <EnergyUpgrade Id="3" />
+            <EnergyUpgrade Id="4" />
+        </FlexBox>
+        <FlexBox Size="550px" Id="pwupgbox">
+            <div>
+                <img src="up/up_power.png" alt="Power" width="5%">
+                Power Upgrades
+            </div>
+            <span id="tabtext_power" class="stat_pr black">Unlocked at tier 40k</span>
+            <PowerUpgrade Id="0" />
+            <PowerUpgrade Id="1" />
+            <PowerUpgrade Id="2" />
+            <PowerUpgrade Id="3" />
+            <PowerUpgrade Id="4" />
+        </FlexBox>
+        <FlexBox Size="550px">
+            <div>
+                <img src="up/up_power.png" alt="Power" width="10%">
+                Autobuy Upgrades
+            </div>
+            
+            <AutoUpgrades Id="0" />
+            <AutoUpgrades Id="1" />
+            <AutoUpgrades Id="2" />
+            <AutoUpgrades Id="3" />
+            <AutoUpgrades Id="4" />
+        </FlexBox>
+    </FlexArea>
+</div>

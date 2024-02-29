@@ -1,0 +1,19 @@
+﻿@namespace Idlebar.Client.Pages
+
+<button id="@ButtonId" class="boostButton">
+    <div class="childcontainer">
+        @ChildContent
+    </div>
+    <div id="@BarId" class="boostButtonBar" />
+</button>
+
+@code{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string ButtonId { get; set; }
+
+    [Parameter]
+    public string BarId { get; set; }
+}

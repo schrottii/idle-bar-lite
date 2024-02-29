@@ -1,0 +1,168 @@
+﻿@namespace Idlebar.Client.Pages
+@inherits PageBase
+
+<div class="g_content @Class">
+
+    <SavedModal />
+
+    <h1>Settings</h1>
+    <FlexArea Center="true">
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <h2>Load / Update</h2>
+            <div>
+                <button id="loadbut" class="prettybuttons">
+                    <h3>Load your Game</h3>
+                </button>
+                <button id="updatebut" class="prettybuttons">
+                    <h3>Update your Game</h3>
+                </button>
+            </div>
+        </FlexBox>
+        <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
+            <h2>Autosave</h2>
+            <p>Auto save will save your game every few seconds while active (blue)</p>
+            <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
+        </FlexBox>
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <h2>Notations</h2>
+            <div>
+                <button id="ntback" class="prettybuttons">
+                    ⬅ Previous
+                </button>
+                <button id="ntforward" class="prettybuttons">
+                    Next ➡
+                </button> <br />
+
+                <div class="dropdown">
+                    <button id="ntmenu" class="dropbtn">
+                        <img src="up/up_searchicon.png" width="15%">Select
+                    </button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="myInput" />
+                        <button id="ntdd0" class="stat_pr">1. Normal</button>
+                        <button id="ntdd1" class="stat_pr">2. Abstract</button>
+                        <button id="ntdd2" class="stat_pr">3. Long Abstract</button>
+                        <button id="ntdd3" class="stat_pr">4. Scientific</button>
+                        <button id="ntdd4" class="stat_pr">5. Keyboard</button>
+                        <button id="ntdd5" class="stat_pr">6. Chemical</button>
+                        <button id="ntdd6" class="stat_pr">7. Short Chemical</button>
+                        <button id="ntdd7" class="stat_pr">8. Flag</button>
+                        <button id="ntdd8" class="stat_pr">9. Geometry</button>
+                        <button id="ntdd9" class="stat_pr">10. Greek</button>
+                        <button id="ntdd10" class="stat_pr">11. Blind</button>
+                        <button id="ntdd11" class="stat_pr">12. Full</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <span id="whatnothtml" class="stat_pr">Notation</span>
+            <span id="prevnothtml"></span>
+        </FlexBox>
+        <FlexBox Id="rewardcodesettings" Stretch="false" Size="300px" class="colorflex">
+            <h2>Reward Codes</h2>
+            Reward codes can be redeemed for rewards (each code only once)!
+            <button id="codebutton" class="prettybuttons">
+                Redeem a reward code
+            </button>
+        </FlexBox>
+        <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
+            <h2>Account</h2>
+            <p>Username</p>
+            <input id="nameinput" type="text" maxlength="@Constants.MaxNameLenght" placeholder="IncreadibleName" />
+            <p>Private Account? <small>(Hide on LBs)</small></p>
+            <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <h2>Color Reset</h2><br />
+            <small> Fun button trolled you again, huh? </small>
+            <button id="colorresetbtn" class="prettybuttons" >
+                <i class="fas fa-paint-roller"></i>
+            </button>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <h2>Troubleshooting</h2>
+            <div>
+                <button id="tabactivatorbtn" class="prettybuttons">
+                    Use this tab
+                </button> <br />
+                <button id="uiupdatebtn" class="prettybuttons">
+                    Update UI
+                </button>
+            </div>
+        </FlexBox>
+    </FlexArea>
+
+    <br />
+    <hr />
+    <br />
+
+    <h1>Statistics</h1>
+    <FlexArea Center="true">
+
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Tiers</h2>
+            <span id="stattotaltiers" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Energy</h2>
+            <span id="stattotalenergy" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Fun Button Clicks</h2>
+            <span id="statfunbuttonclicks" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Levels</h2>
+            <span id="stattotallevels" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Power</h2>
+            <span id="stattotalpower" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Click Time</h2>
+            <span id="stattotalclicktime" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Total Quests Done</h2>
+            <span id="stattotalquestsdone" class="stat_pr">0</span>
+        </FlexBox>
+        <br />
+
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Highest Level</h2>
+            <span id="stathighestlevel" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Highest Tier</h2>
+            <span id="stathighesttier" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Trophies</h2>
+            <span id="stattotaltrophies" class="stat_pr">0</span>
+        </FlexBox>
+        <FlexBox Stretch="false" Size="200px" class="colorflex">
+            <h2>Milestones</h2>
+            <span id="statmilestones" class="stat_pr">0</span>
+        </FlexBox>
+    </FlexArea>
+
+    <div align="center">
+        <br />
+        <hr>
+        <h1>Collection</h1>
+        You can get trophies at the Reward Road <br />
+        Hover over them to read their descriptions! <br />
+        <small>(Hold on mobile)</small>
+        <!-- Yes I put it here. Now kill me -->
+        <span id="collection" class="stat_pr">RR</span>
+
+        <br /><progress id="tbar" max="100" value="0"></progress>
+        <br />
+        <br /><br />
+
+        <span id="tabgameversionid">0</span>
+    </div>
+
+</div>

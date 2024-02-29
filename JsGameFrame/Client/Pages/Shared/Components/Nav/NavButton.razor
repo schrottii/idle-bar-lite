@@ -1,0 +1,31 @@
+﻿@namespace Idlebar.Client.Pages
+
+<li>
+    <span class="@Class @Classes" @onclick="() => OnSelect.Invoke(TabId)">
+        @ChildContent
+    </span>
+</li>
+
+
+@code {
+    [Parameter]
+    public int TabId { get; set; }
+
+    [Parameter]
+    public int CurrentTab { get; set; }
+
+    [Parameter]
+    public string Classes { get; set; }
+
+    [Parameter]
+    public Action<int> OnSelect { get; set; }
+
+    [Parameter]
+    public string ActiveClass { get; set; } = "g_bar_active";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public bool Active => CurrentTab == TabId;
+    public string Class => Active ? ActiveClass : "";
+}

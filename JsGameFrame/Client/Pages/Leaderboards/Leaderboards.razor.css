@@ -1,0 +1,61 @@
+﻿table, th, td {
+    border: 1px solid #808080;
+}
+
+th, td {
+    padding: 15px 0 15px 0;
+}
+
+th {
+    text-align: center;
+    background-color: #4CAF50;
+}
+
+table {
+    border-spacing: 4px;
+}
+
+tr{
+    background-color: lightcoral;
+}
+tr:nth-child(even) {
+    background-color: lightsalmon;
+}
+
+button {
+    color: black;
+    border-radius: 8px;
+    border: 1px solid black;
+    width: 150px;
+    margin: 25px;
+    outline: none;
+    font-size: 48px;
+    padding: 5px;
+}
+
+#refreshbtn {
+    background-color: #bb9457 /*greenyellow*/;
+}
+
+#refreshbtn:hover{
+    background-color: palegreen;
+}
+
+div {
+    text-align: center;
+    color: black;
+}
+
+#rank0{
+    background-color: gold;
+}
+#rank1{
+    background-color: silver;
+}
+#rank2 {
+    background-color: #CD7F32;
+}
+
+::deep .lbnavcolor {
+    background-color: #111 /*#0900bd #4ad5ff*/;
+}

@@ -1,0 +1,31 @@
+
+@namespace Idlebar.Client.Pages 
+
+<div id="QuestModal" class="modal">
+    <div class="modal-content">
+        <center>
+            <span class="close" Id="closequests">&times;</span>
+
+            <div>
+                <h1> <img src="up/up_3quests.png" width="10%" height="10%"> Quests </h1>
+                <hr> <br />
+                Complete quests to get rewards! <br /> <br />
+
+                @for (int i = 0; i < Constants.QuestSlots; i++)
+                {
+                    <div class="questline goldtext">
+                        <img src="up/up_quests.png" width="5%" height="5%" />
+                        <p><b id="@($"questHead{i}")" /></p>
+                        <p id="@($"questProgress{i}")" />
+                        <p id="@($"questReward{i}")"/>
+                        <button class="claimbtn" id="@($"questClaimBtn{i}")">Claim</button>
+                    </div>
+                }
+            </div>
+        </center>
+
+
+    </div>
+
+
+</div>

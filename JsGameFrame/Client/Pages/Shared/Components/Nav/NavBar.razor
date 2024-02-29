@@ -1,0 +1,18 @@
+﻿@namespace Idlebar.Client.Pages
+
+<nav class="g_bar" style="background-color: @Color">
+    <ul>
+        @ChildContent
+    </ul>
+</nav>
+
+@code{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public int Height { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿@namespace Idlebar.Client.Pages
+
+<div id="@BoxId">
+    <input type="range" min="@Min" max="@Max" value="@Initial" id="@InputId" orient="@(Vertical ? "vertical" : "horizontal")" class="@(Vertical ? "vertical" : "")">
+</div>
+
+@code {
+    [Parameter]
+    public string BoxId { get; set; }
+
+    [Parameter]
+    public string InputId { get; set; }
+
+    [Parameter]
+    public bool Vertical { get; set; }
+
+    [Parameter]
+    public int Min { get; set; } = 0;
+
+    [Parameter]
+    public int Max { get; set; } = 100;
+
+    [Parameter]
+    public int Initial { get; set; } = 100;
+}

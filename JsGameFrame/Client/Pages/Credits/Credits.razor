@@ -1,0 +1,132 @@
+﻿@namespace Idlebar.Client.Pages
+@inherits PageBase
+
+<div class="g_content @Class">
+
+    <br>
+    <div align="center">
+    
+    <FlexBox Stretch="true" class="colorflex">
+        <h2>Help</h2></FlexBox>
+
+        <FlexArea Center="true">
+        <FlexBox Stretch="true" class="colorflex">
+
+        <h3> Progress, Levels and Tiers </h3><br>
+        The progress bar automatically earns progress. Once it is full, it will empty and both a level and a tier will be earned.
+        Progress can be speeded up for some time by clicking the click button. 
+        Levels can be spent on 5 level upgrades that increase the progress earned.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Reset</h3> <br>
+        Several things can be reset (Levels, level upgrades, etc.) to increase the reset multi, which increases the progress earned.
+        After clicking the reset button, there will be further explanation.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Energy</h3>
+         <span id="help_energy"></span>
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Power</h3>
+        <span id="help_power"></span>
+        </FlexBox></FlexArea><FlexArea Center="true"><FlexBox Stretch="true" class="colorflex">
+
+
+
+        <h3>Reversed Generator</h3>
+        The Reversed Generator is unlocked at 20k tiers. Energy can be converted to a temporary progress boost.
+        RG tokens can be used to get the highest previously used boost for 180 seconds, they can be stacked.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Reward Road</h3>
+        The Reward Road is a battle pass-like feature unlocked at 30k tiers. Reward Road Progress can be earned from several things.
+        Further explanation at the Reward Road.
+        The collection contains several trophies, which can be earned from codes and at the Reward Road. They are decoration.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Quests</h3>
+        Quests are unlocked at 50k tiers. There's 5 quest slots, new quests will appear when saving.
+        Each quest has a randomly selected thing that has to be done and a randomly selected reward of the same difficulty.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+        <h3>Common Abbreviations</h3>
+        Some common abbreviations you may find in the patch notes or community: <br />
+        RG = Reversed Generator <br> RR = Reward Road <br> RRP = Reward Road Progress <br> IB = Idle Bar <br> LLTS = Lowlevel Triplespeed <br> ME = More Energy
+        </FlexBox></FlexArea><FlexArea Center="true"><FlexBox Stretch="true" class="colorflex">
+
+        <h3>More help</h3>
+        If you need more help, the wiki can probably help you out. Don't forget to save and keep the ID - which is used for loading your account
+        You can also find help on the creator's discord channel in the #idle-bar channel.
+        <br /> The game will only be running if it's the selected tab in your browser. You can open a second window with the game as only tab and leave it open in the background.
+        </FlexBox>
+        </FlexArea>
+        <br />
+    </div>
+    <hr>
+    <div align="center">
+        <FlexArea Center="true">
+        
+        <FlexBox Stretch="false" Size="100px" class="colorflex">
+        <h2>Credits</h2></FlexBox> <br />
+
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+        <p>Designed, developed and managed by <br /><a href="https://discord.gg/3T4CBmh" target="_blank">frankneurhein</a> based on an old project by <a href="https://veprogames.github.io/" target="_blank">Vepro</a></p>
+        </FlexBox>
+        
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+        <p>Hosted and co-developed by <br /> Playwo</p>
+        </FlexBox>
+        
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+        <p>Icons provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+        </FlexBox>
+
+        </FlexArea>
+        <br />
+     
+        <FlexArea Center="true">
+        <FlexBox Stretch="false" Size="100px" class="colorflex">
+        <h2>Links</h2></FlexBox><br />
+
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <i class="fab fa-discord" /> <br /> <b><a href="https://discord.gg/3T4CBmh" target="_blank">Join my Server</a></b> <br /> The most active Idle Bar community <br /> Cool people to hang out with <br /> including the developer
+        </FlexBox>
+
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <i class="fas fa-atlas" /> <br /> <b><a href="https://idle-bar.fandom.com/wiki/Idle_Bar_Wiki" target="_blank">Official Idle Bar Wiki</a></b> <br /> Help and infos <br /> <i><a href="https://idle-bar.fandom.com/wiki/Idle_Bar_Updates" target="_blank">Patch notes</a></i>
+        </FlexBox>
+
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <i class="fab fa-reddit" /> <br /> <b><a href="https://www.reddit.com/r/IdleBar/" target="_blank">Official r/IdleBar subreddit</a></b> <br /> Announcements, leaks, user content and more
+        </FlexBox>
+        <!--
+        <FlexBox Stretch="false" Size="300px" class="colorflex">
+            <i class="fab fa-trello" /> <br /> <b><a href="https://trello.com/b/PJOP1N0F/idlebar" target="_blank">Our trello</a></b> <br /> See the progress of the next update!
+        </FlexBox>
+        -->
+        </FlexArea>
+        
+
+        <!-- Put into modal -->
+        <hr /> <h1> <img src="up/up_quests.png" width="4%"> News </h1><br />
+        <FlexBox Stretch="false" class="colorflex">
+        <span id="news_news">1</span>
+        <br />
+        <div>
+            <button id="newsforwardbtn" class="prettybuttons">⬅ Previous</button>
+            <button id="newsbackwardbtn" class="prettybuttons">Next ➡</button>
+        </div>
+        </FlexBox>
+
+
+        <hr />
+        <br />Feel free to share the game with more people, we appreciate it a lot :)
+        <div align="center">
+            <b><span id="gameversionid">0</span></b>
+        </div>
+        <hr />
+
+        
+    </div>
+    <hr>
+</div>

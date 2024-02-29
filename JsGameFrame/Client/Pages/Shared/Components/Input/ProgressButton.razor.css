@@ -1,0 +1,31 @@
+﻿.boostButtonBar {
+    height: 100%;
+    background-color: orangered;
+    color: red;
+    margin: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.boostButton {
+    width: 150px;
+    height: 65px;
+    color: black;
+    background-color: #5ca6e6;
+    padding: 0;
+    border: none;
+    outline: none;
+    margin: 6px;
+    font-size: 20px;
+    border: 3px solid black;
+}
+
+button{
+    position: relative;
+}
+
+.childcontainer{
+    position: relative;
+    z-index: 1;
+}

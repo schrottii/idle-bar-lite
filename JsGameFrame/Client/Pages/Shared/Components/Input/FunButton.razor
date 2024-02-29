@@ -1,0 +1,26 @@
+﻿@namespace Idlebar.Client.Pages
+@inject IJSRuntime JSRuntime
+@inject Random Random
+
+<span id="funbutton" class="@(CurrentTab != FunButtonTab ? " g_hidden" : "")" />
+
+
+@code {
+    [Parameter]
+    public int CurrentTab { get; set; } 
+
+    public int FunButtonTab { get; set; }
+
+    protected override void OnInitialized()
+            => SetFunButtonTab();
+
+    public async Task Handle_FunButton()
+    {
+        SetFunButtonTab();
+        await JSRuntime.InvokeVoidAsync("Handle_FunButton");
+    }
+
+    private void SetFunButtonTab()
+        => FunButtonTab = Random.Next(4);
+
+}

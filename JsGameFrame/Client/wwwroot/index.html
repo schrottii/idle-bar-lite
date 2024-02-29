@@ -1,0 +1,540 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Idle Bar</title>
+    <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="apple-touch-icon" sizes="64x64" href="icon-64.png" />
+</head>
+
+<body id="body">
+    <div align="center">
+        <h1>Idle Bar</h1>
+    </div><hr>
+
+    <!-- Currencies -->
+    <div style="text-align: center">
+        <FlexBox Stretch="false" class="colorflex">
+
+            <div align="center">
+                <div>
+                    <span id="text_level" class="stat_pr">0</span>
+                    <span id="tier_level" class="stat_pr">0</span>
+
+                </div>
+            </div>
+            <br>
+
+            <button id="progressButton1" class="buttons" onclick="Handle_ProgressButton()" style="max-width: 40%; height: 96px">
+                <i class="fas fa-plus-circle" /> <b>Click!</b>
+            </button>
+        </FlexBox>
+        <FlexBox Stretch="false" SpaceY="true" Id="enctrlbox" class="colorflex">
+
+            <div>
+                <img src="up/up_energy.png" alt="Energy" width="5%">
+                <span id="text_energy" class="stat_pr"></span>
+                <span id="text_energypersec" class="stat_pr"></span>
+                <br>
+                Keep the slider at max. for full energy production!
+                <br> It goes down automatically after some time
+            </div>
+            <RangeSlider Max="(int)(Constants.MaxSliderMultiplier * 100)" Min="10" Initial="50" BoxId="enmultibox" InputId="enmultislider" />
+        </FlexBox>
+
+        <FlexBox Stretch="false" SpaceY="true" Id="poctrlbox" class="colorflex">
+            <div><img src="up/up_power.png" alt="Power" width="10%" align="center"><span id="text_power" class="stat_pr" align="center">0</span></div>
+            <span id="power_text"></span>
+        </FlexBox>
+
+
+        <FlexBox Stretch="false" class="colorflex">
+            <br>
+            Progress to Level Bar: <br> <progress id="pbar" max="100" value="0"></progress>
+            <br>
+            Tiers to Milestone Bar: <br> <progress id="pbar2" max="100" value="0"></progress>
+            <br> <span id="text_progress" class="stat_pr">0</span><br>
+            <span id="nextMilestoneBarGoal" class="stat_pr">0</span>
+        </FlexBox>
+
+        <FlexBox Stretch="false" class="colorflex" Id="auctrlbox">
+
+            <!-- Auto 1 -->
+            <FlexArea Center="true">
+                <div class="buttonbg">
+                    <span id="autobuy1">0</span>
+                    <button id="autobuyb1" class="prettybuttons">Change</button>
+                </div>
+                <!-- Auto 2 -->
+                <div class="buttonbg">
+                    <span id="autobuy2">0</span>
+                    <button id="autobuyb2" class="prettybuttons">Change</button>
+                </div>
+            </FlexArea>
+            <!-- Auto 3 -->
+            <FlexArea Center="true">
+                <div class="buttonbg">
+                    <span id="autobuy3">0</span>
+                    <button id="autobuyb3" class="prettybuttons">Change</button>
+                </div>
+                <!-- Auto 4 -->
+                <div class="buttonbg">
+                    <span id="autobuy4">0</span>
+                    <button id="autobuyb4" class="prettybuttons">Change</button>
+                </div>
+            </FlexArea>
+            <!-- Auto 5 -->
+            <div class="buttonbg">
+                <span id="autobuy5">0</span>
+                <button id="autobuyb5" class="prettybuttons">Change</button>
+            </div>
+
+        </FlexBox>
+    </div>
+
+    <!-- The right side! -->
+    <div style="text-align: center">
+
+        <!--
+        <!-- <div class="centralholder">
+            <FlexBox Stretch="false" SpaceY="true" Id="rrbox" class="colorflex">
+                <h2>Reward Road</h2>
+                <div>
+                    <button id="btn_openrr" class="resetbutton">
+                        View Reward Road
+                    </button>
+                </div>
+            </FlexBox> -->
+        <!--
+                <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+                    <h2>soon</h2>
+                    <div>
+                        <button  class="resetbutton" onclick="alert('I said soon you small brain moron!');">
+                            soon
+                        </button>
+                    </div>
+                </FlexBox>
+
+        <FlexBox Stretch="false" SpaceY="true" Id="questsbox" class="colorflex">
+            <h2>Quests</h2>
+            <div>
+                <button id="btn_openqu" class="resetbutton">
+                    View Quests
+                </button>
+            </div>
+        </FlexBox> -->
+
+        <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+            <h2>Reset</h2>
+            <img src="up/up_reset.png" alt="Reset" width="64px" id="btn_img_reset">
+            <button id="btn_reset" class="resetbutton">
+                RESET
+            </button>
+            <br>
+        </FlexBox>
+
+        <div>
+
+
+            <div id="rgbox">
+                <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+                    <img class="limitedsize" src="reversedgenerator.png" alt="Reversed Generator">
+                    <button id="enpowdisplay" class="prettybuttons">Click to activate the Reversed Generator 0</button><br />
+
+                    <div class="half">
+                        <div class="prettybuttons rgbuttons1" Id="rgminus9">---</div>
+                        <div class="prettybuttons rgbuttons2" Id="rgminus1">-</div>
+                        <div class="prettybuttons rgbuttons2" Id="rgplus1">+</div>
+                        <div class="prettybuttons rgbuttons1" Id="rgplus9">+++</div>
+                    </div><br />
+
+                    <p id="rgtimeleftp"></p>
+                    <progress id="rgbar" max="180" value="0"></progress> <br>
+                    Activate the Reversed Generator (RG) to increase your progress gain for some time! Select how much energy you want to pay and then click the button to activate it.<br>
+
+                    <div><img src="up/up_token_rg.png" alt="RG token" width="10%"><span id="rgtokendisplay" class="stat_pr">0</span></div>
+                    <button class="prettybuttons" Id="usergbutton">Use RG token!</button>
+                    Use RG tokens to get your highest RG boost for 3 minutes! (Stackable)
+                </FlexBox>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <br clear="all">
+    <hr />
+
+    <button id="multibutton" class="prettybuttons" style="text-align: center"></button>
+
+    <FlexArea Id="upgradesbox" Center="true">
+        <h1>Upgrades</h1>
+        <FlexBox Size="550px" Id="lvlupgbox">
+            Level Upgrades
+            <div><span id="tabtext_level" class="stat_pr black">0</span><span id="tabtext_tier" class="stat_pr black">0</span></div>
+            <button id="lvlupg_b_0" class="buttons"><p id="lvlupg_p_0">e</p></button>
+            <button id="lvlupg_b_1" class="buttons"><p id="lvlupg_p_1">e</p></button>
+            <button id="lvlupg_b_2" class="buttons"><p id="lvlupg_p_2">e</p></button>
+            <button id="lvlupg_b_3" class="buttons"><p id="lvlupg_p_3">e</p></button>
+            <button id="lvlupg_b_4" class="buttons"><p id="lvlupg_p_4">e</p></button>
+        </FlexBox>
+        <FlexBox Size="550px" Id="enupgbox">
+            <div>
+                <img src="up/up_energy.png" alt="Energy" width="64px">
+                Energy Upgrades
+            </div>
+            <span id="tabvenergy" class="stat_pr">Unlocked at tier 10k</span>
+            <button id="enupg_b_0" class="buttons"><p id="enupg_p_0">e</p></button>
+            <button id="enupg_b_1" class="buttons"><p id="enupg_p_1">e</p></button>
+            <button id="enupg_b_2" class="buttons"><p id="enupg_p_2">e</p></button>
+            <button id="enupg_b_3" class="buttons"><p id="enupg_p_3">e</p></button>
+            <button id="enupg_b_4" class="buttons"><p id="enupg_p_4">e</p></button>
+        </FlexBox>
+        <FlexBox Size="550px" Id="pwupgbox">
+            <div>
+                <img src="up/up_power.png" alt="Power" width="64px">
+                Power Upgrades
+            </div>
+            <span id="tabtext_power" class="stat_pr black">Unlocked at tier 40k</span>
+            <button id="poupg_b_0" class="buttons"><p id="poupg_p_0">e</p></button>
+            <button id="poupg_b_1" class="buttons"><p id="poupg_p_1">e</p></button>
+            <button id="poupg_b_2" class="buttons"><p id="poupg_p_2">e</p></button>
+            <button id="poupg_b_3" class="buttons"><p id="poupg_p_3">e</p></button>
+            <button id="poupg_b_4" class="buttons"><p id="poupg_p_4">e</p></button>
+        </FlexBox>
+        <FlexBox Size="550px" Id="auupgbox">
+            <div>
+                <img src="up/up_power.png" alt="Power" width="64px">
+                Autobuy Upgrades
+            </div>
+
+            <button id="auupg_b_0" class="buttons"><p id="auupg_p_0">e</p></button>
+            <button id="auupg_b_1" class="buttons"><p id="auupg_p_1">e</p></button>
+            <button id="auupg_b_2" class="buttons"><p id="auupg_p_2">e</p></button>
+            <button id="auupg_b_3" class="buttons"><p id="auupg_p_3">e</p></button>
+            <button id="auupg_b_4" class="buttons"><p id="auupg_p_4">e</p></button>
+        </FlexBox>
+    </FlexArea>
+
+
+
+
+
+
+    <br clear="all">
+    <hr />
+
+    <div align="center">
+        <FlexArea Center="true">
+            <h1>Settings</h1>
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <h2>Load / Update</h2>
+                <div>
+                    <button id="loadbut" class="prettybuttons">
+                        <h3>Load Local Code</h3>
+                    </button>
+                    <button id="updatebut" class="prettybuttons">
+                        <h3>Save Local Code</h3>
+                    </button>
+                </div>
+            </FlexBox>
+            <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
+                <h2>Autosave</h2>
+                <p>Auto save will save your game every few seconds while active (blue)</p>
+                <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
+            </FlexBox>
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <h2>Notations</h2>
+                <div>
+                    <button id="ntback" class="prettybuttons">
+                        ⬅ Previous
+                    </button>
+                    <button id="ntforward" class="prettybuttons">
+                        Next ➡
+                    </button> <br />
+
+                    <div class="dropdown">
+                        <button id="ntmenu" class="dropbtn">
+                            <img src="up/up_searchicon.png" width="15%">Select
+                        </button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" />
+                            <button id="ntdd0" class="stat_pr">1. Normal</button>
+                            <button id="ntdd1" class="stat_pr">2. Abstract</button>
+                            <button id="ntdd2" class="stat_pr">3. Long Abstract</button>
+                            <button id="ntdd3" class="stat_pr">4. Scientific</button>
+                            <button id="ntdd4" class="stat_pr">5. Keyboard</button>
+                            <button id="ntdd5" class="stat_pr">6. Chemical</button>
+                            <button id="ntdd6" class="stat_pr">7. Short Chemical</button>
+                            <button id="ntdd7" class="stat_pr">8. Flag</button>
+                            <button id="ntdd8" class="stat_pr">9. Geometry</button>
+                            <button id="ntdd9" class="stat_pr">10. Greek</button>
+                            <button id="ntdd10" class="stat_pr">11. Blind</button>
+                            <button id="ntdd11" class="stat_pr">12. Full</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span id="whatnothtml" class="stat_pr">Notation</span>
+                <span id="prevnothtml"></span>
+            </FlexBox>
+            <!-- <FlexBox Id="rewardcodesettings" Stretch="false" Size="300px" class="colorflex">
+            <h2>Reward Codes</h2>
+            Reward codes can be redeemed for rewards (each code only once)!
+            <button id="codebutton" class="prettybuttons">
+                Redeem a reward code
+            </button>
+        </FlexBox>
+        <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
+            <h2>Account</h2>
+            <p>Username</p>
+            <input id="nameinput" type="text" placeholder="IncreadibleName" />
+            <p>Private Account? <small>(Hide on LBs)</small></p>
+            <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
+        </FlexBox> -->
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <h2>Color Reset</h2><br />
+                <small> Fun button trolled you again, huh? </small>
+                <button id="colorresetbtn" class="prettybuttons">
+                    <i class="fas fa-paint-roller"></i>
+                </button>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <h2>Troubleshooting</h2>
+                <div>
+                    <button id="tabactivatorbtn" class="prettybuttons">
+                        Use this tab
+                    </button> <br />
+                    <button id="uiupdatebtn" class="prettybuttons">
+                        Update UI
+                    </button>
+                </div>
+            </FlexBox>
+        </FlexArea>
+
+
+
+
+
+        <br clear="all">
+        <hr />
+
+        <FlexArea Center="true">
+            <h1>Stats</h1>
+
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Tiers</h2>
+                <span id="stattotaltiers" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Energy</h2>
+                <span id="stattotalenergy" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Fun Button Clicks</h2>
+                <span id="statfunbuttonclicks" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Levels</h2>
+                <span id="stattotallevels" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Power</h2>
+                <span id="stattotalpower" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Click Time</h2>
+                <span id="stattotalclicktime" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Total Quests Done</h2>
+                <span id="stattotalquestsdone" class="stat_pr">0</span>
+            </FlexBox>
+            <br />
+
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Highest Level</h2>
+                <span id="stathighestlevel" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Highest Tier</h2>
+                <span id="stathighesttier" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Trophies</h2>
+                <span id="stattotaltrophies" class="stat_pr">0</span>
+            </FlexBox>
+            <FlexBox Stretch="false" Size="200px" class="colorflex">
+                <h2>Milestones</h2>
+                <span id="statmilestones" class="stat_pr">0</span>
+            </FlexBox>
+        </FlexArea>
+
+        <!--
+    <div align="center">
+        <br />
+        <hr>
+        <h1>Collection</h1>
+        You can get trophies at the Reward Road <br />
+        Hover over them to read their descriptions! <br />
+        <small>(Hold on mobile)</small>
+        <span id="collection" class="stat_pr">RR</span>
+
+        <br /><progress id="tbar" max="100" value="0"></progress>
+        <br />
+        <br /><br />
+    </div>
+        -->
+        <span id="tabgameversionid">0</span>
+    </div>
+
+
+
+
+
+
+    <br clear="all">
+    <hr />
+
+    <FlexArea Center="true">
+        <h1>Help</h1>
+        <FlexBox Stretch="true" class="colorflex">
+
+            <h3> Progress, Levels and Tiers </h3><br>
+            The progress bar automatically earns progress. Once it is full, it will empty and both a level and a tier will be earned.
+            Progress can be speeded up for some time by clicking the click button.
+            Levels can be spent on 5 level upgrades that increase the progress earned.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Reset</h3> <br>
+            Several things can be reset (Levels, level upgrades, etc.) to increase the reset multi, which increases the progress earned.
+            After clicking the reset button, there will be further explanation.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Energy</h3>
+            <span id="help_energy"></span>
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Power</h3>
+            <span id="help_power"></span>
+        </FlexBox>
+    </FlexArea><FlexArea Center="true">
+        <FlexBox Stretch="true" class="colorflex">
+
+
+
+            <h3>Reversed Generator</h3>
+            The Reversed Generator is unlocked at 20k tiers. Energy can be converted to a temporary progress boost.
+            RG tokens can be used to get the highest previously used boost for 180 seconds, they can be stacked.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Reward Road</h3>
+            The Reward Road is a battle pass-like feature unlocked at 30k tiers. Reward Road Progress can be earned from several things.
+            Further explanation at the Reward Road.
+            The collection contains several trophies, which can be earned from codes and at the Reward Road. They are decoration.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Quests</h3>
+            Quests are unlocked at 50k tiers. There's 5 quest slots, new quests will appear when saving.
+            Each quest has a randomly selected thing that has to be done and a randomly selected reward of the same difficulty.
+        </FlexBox><FlexBox Stretch="true" class="colorflex">
+
+            <h3>Common Abbreviations</h3>
+            Some common abbreviations you may find in the patch notes or community: <br />
+            RG = Reversed Generator <br> RR = Reward Road <br> RRP = Reward Road Progress <br> IB = Idle Bar <br> LLTS = Lowlevel Triplespeed <br> ME = More Energy
+        </FlexBox>
+    </FlexArea><FlexArea Center="true">
+        <FlexBox Stretch="true" class="colorflex">
+
+            <h3>More help</h3>
+            If you need more help, the wiki can probably help you out. Don't forget to save and keep the ID - which is used for loading your account
+            You can also find help on the creator's discord channel in the #idle-bar channel.
+            <br /> The game will only be running if it's the selected tab in your browser. You can open a second window with the game as only tab and leave it open in the background.
+        </FlexBox>
+    </FlexArea>
+    <br />
+
+    <hr>
+    <div align="center">
+        <FlexArea Center="true">
+
+            <FlexBox Stretch="false" Size="100px" class="colorflex">
+                <h2>Credits</h2>
+            </FlexBox> <br />
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <p>Designed, developed and managed by <br /><a href="https://discord.gg/3T4CBmh" target="_blank">frankneurhein</a> based on an old project by <a href="https://veprogames.github.io/" target="_blank">Vepro</a></p>
+            </FlexBox>
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <p>Hosted and co-developed by <br /> Playwo</p>
+            </FlexBox>
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <p>Icons provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+            </FlexBox>
+
+        </FlexArea>
+        <br />
+
+        <FlexArea Center="true">
+            <FlexBox Stretch="false" Size="100px" class="colorflex">
+                <h2>Links</h2>
+            </FlexBox><br />
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <i class="fab fa-discord" /> <br /> <b><a href="https://discord.gg/3T4CBmh" target="_blank">Join my Server</a></b> <br /> The most active Idle Bar community <br /> Cool people to hang out with <br /> including the developer
+            </FlexBox>
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <i class="fas fa-atlas" /> <br /> <b><a href="https://idle-bar.fandom.com/wiki/Idle_Bar_Wiki" target="_blank">Official Idle Bar Wiki</a></b> <br /> Help and infos <br /> <i><a href="https://idle-bar.fandom.com/wiki/Idle_Bar_Updates" target="_blank">Patch notes</a></i>
+            </FlexBox>
+
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <i class="fab fa-reddit" /> <br /> <b><a href="https://www.reddit.com/r/IdleBar/" target="_blank">Official r/IdleBar subreddit</a></b> <br /> Announcements, leaks, user content and more
+            </FlexBox>
+            <!--
+            <FlexBox Stretch="false" Size="300px" class="colorflex">
+                <i class="fab fa-trello" /> <br /> <b><a href="https://trello.com/b/PJOP1N0F/idlebar" target="_blank">Our trello</a></b> <br /> See the progress of the next update!
+            </FlexBox>
+            -->
+        </FlexArea>
+
+        <!--
+        <!-- Put into modal
+        <hr /> <h1> <img src="up/up_quests.png" width="4%"> News </h1><br />
+        <FlexBox Stretch="false" class="colorflex">
+            <span id="news_news">1</span>
+            <br />
+            <div>
+                <button id="newsforwardbtn" class="prettybuttons">⬅ Previous</button>
+                <button id="newsbackwardbtn" class="prettybuttons">Next ➡</button>
+            </div>
+        </FlexBox>
+            -->
+
+        <hr />
+        <div align="center">
+            <b><span id="gameversionid">0</span></b>
+        </div>
+        <hr />
+
+
+    </div>
+
+    <span id="funButton"></span>
+
+    <script src="scripts/game.js"></script>
+</body>
+</html>

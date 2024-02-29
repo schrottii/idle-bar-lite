@@ -1,0 +1,64 @@
+﻿#rrbox {
+    display: none;
+}
+
+#rgbox {
+    display: none;
+}
+
+@media(max-width: 610px) {
+
+    ::deep #rgbuttonbox {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+::deep .rgbtnfbox {
+    background-color: unset;
+    flex-direction: row;
+    border: unset;
+}
+
+::deep #enmultibox {
+    width: 85%;
+    max-width: 550px;
+}
+
+::deep #enmultislider {
+    background-color: white;
+    outline: none;
+    appearance: none;
+    border-radius: 20px;
+    height: 25px;
+    width: 100%;
+}
+
+    ::deep #enmultislider::-webkit-slider-thumb {
+        -webkit-appearance: none; 
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background-color: darkred; 
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    ::deep #enmultislider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background-color: darkred;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+.centralholder{
+    display: flex;
+    justify-content: space-around;
+}
+@media(max-width: 610px) {
+
+    .centralholder {
+        flex-direction: column;
+    }
+}

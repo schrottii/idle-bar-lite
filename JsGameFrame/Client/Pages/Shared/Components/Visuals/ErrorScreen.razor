@@ -1,0 +1,33 @@
+﻿@namespace Idlebar.Client.Pages
+
+<div class="loadcontainer">
+    <i class="huge fas fa-exclamation-circle" />
+    <div class="loaddescription">
+        <b>
+            @ChildContent
+            <br />
+            Try again again or contact the Developers.
+            <br />
+        </b>
+    </div>
+    <div>
+        @if (AllowClose)
+        {
+            <i class="close fas fa-times-circle" @onclick="() => OnClosed.InvokeAsync()"></i>
+        }
+        <a href="https://discord.gg/ZxQ6nRh" target="_blank">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool AllowClose { get; set; }
+
+    [Parameter]
+    public EventCallback OnClosed { get; set; }
+}

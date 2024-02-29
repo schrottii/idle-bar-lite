@@ -1,0 +1,14 @@
+﻿nav {
+    height: 8vh;
+    min-height: 55px;
+    width: 100vw;
+    background-color: #99582a /*#ff6400 #d58800*/;
+    margin: 0;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    height: 100%;
+}

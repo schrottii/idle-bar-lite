@@ -1,0 +1,156 @@
+@namespace Idlebar.Client.Pages
+@inherits PageBase
+
+<div class="g_content @Class">
+    <div align="center">
+        <h1>Idle Bar</h1>
+    </div><hr>
+
+    <!-- Currencies -->
+    <div class="columnleft">
+        <FlexBox Stretch="false" class="colorflex">
+
+            <div align="center">
+                <div>
+                    <span id="text_level" class="stat_pr">0</span>
+                    <span id="tier_level" class="stat_pr">0</span>
+                    
+                </div>
+            </div>
+            <br >
+
+            <ProgressButton ButtonId="progressButton1" BarId="progressButtonBar1">
+                <i class="fas fa-plus-circle" />
+            </ProgressButton>
+        </FlexBox>
+        <FlexBox Stretch="false" SpaceY="true" Id="enctrlbox" class="colorflex">
+
+            <div>
+                <img src="up/up_energy.png" alt="Energy" width="5%">
+                <span id="text_energy" class="stat_pr"></span>
+                <span id="text_energypersec" class="stat_pr"></span>
+                <br >
+                Keep the slider at max. for full energy production!
+                <br > It goes down automatically after some time
+            </div>
+            <RangeSlider Max="(int)(Constants.MaxSliderMultiplier * 100)" Min="10" Initial="50" BoxId="enmultibox" InputId="enmultislider" />
+        </FlexBox>
+
+        <FlexBox Stretch="false" SpaceY="true" Id="poctrlbox" class="colorflex">
+        <div><img src="up/up_power.png" alt="Power" width="10%" align="center"><span id="text_power" class="stat_pr" align="center">0</span></div>
+        <span id="power_text"></span>
+        </FlexBox>
+
+
+        <FlexBox Stretch="false" class="colorflex">
+        <br >
+        Progress to Level Bar: <br> <progress id="pbar" max="100" value="0"></progress>
+        <br >
+        Tiers to Milestone Bar: <br> <progress id="pbar2" max="100" value="0"></progress>
+        <br> <span id="text_progress" class="stat_pr">0</span><br>
+        <span id="nextMilestoneBarGoal" class="stat_pr">0</span> 
+        </FlexBox>
+
+        <FlexBox Stretch="false" class="colorflex" Id="auctrlbox">
+        
+        <!-- Auto 1 -->
+        <FlexArea Center="true">
+        <div class="buttonbg">
+        <span id="autobuy1">0</span>
+        <button id="autobuyb1" class="prettybuttons">Change</button>
+        </div>
+        <!-- Auto 2 -->
+        <div class="buttonbg">
+        <span id="autobuy2">0</span>
+        <button id="autobuyb2" class="prettybuttons">Change</button>
+        </div>
+        </FlexArea>
+        <!-- Auto 3 -->
+        <FlexArea Center="true">
+        <div class="buttonbg">
+        <span id="autobuy3">0</span>
+        <button id="autobuyb3" class="prettybuttons">Change</button>
+        </div>
+        <!-- Auto 4 -->
+        <div class="buttonbg">
+        <span id="autobuy4">0</span>
+        <button id="autobuyb4" class="prettybuttons">Change</button>
+        </div>
+        </FlexArea>
+        <!-- Auto 5 -->
+        <div class="buttonbg">
+        <span id="autobuy5">0</span>
+        <button id="autobuyb5" class="prettybuttons">Change</button>
+        </div>
+
+        </FlexBox>
+    </div>
+
+    <!-- The right side! -->
+    <div class="columnright" align-content="center">
+
+        <!-- <div class="centralholder"> -->
+            <FlexBox Stretch="false" SpaceY="true" Id="rrbox" class="colorflex">
+                <h2>Reward Road</h2>
+                <div>
+                    <button id="btn_openrr" class="resetbutton">
+                        View Reward Road
+                    </button>
+                </div>
+            </FlexBox>
+<!--
+            <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+                <h2>soon</h2>
+                <div>
+                    <button  class="resetbutton" onclick="alert('I said soon you small brain moron!');">
+                        soon
+                    </button>
+                </div>
+            </FlexBox>
+            -->
+            <FlexBox Stretch="false" SpaceY="true" Id="questsbox" class="colorflex">
+                <h2>Quests</h2>
+                <div>
+                    <button id="btn_openqu" class="resetbutton" >
+                        View Quests
+                    </button>
+                </div>
+            </FlexBox>
+
+        <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+                <h2>Reset</h2>
+                <img src="up/up_reset.png" alt="Reset" width="10%" id="btn_img_reset" >
+                <button id="btn_reset" class="resetbutton" >
+                    RESET
+                </button>
+                <br >
+            </FlexBox>
+
+        <div>
+        
+
+                <div id="rgbox">
+                <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+                    <img class="limitedsize" src="reversedgenerator.png" alt="Reversed Generator">
+                            <button id="enpowdisplay" class="prettybuttons">Click to activate the Reversed Generator 0</button><br />
+
+                            <div class="half">
+                            <div class="prettybuttons rgbuttons1" Id="rgminus9">---</div>
+                            <div class="prettybuttons rgbuttons2" Id="rgminus1">-</div>
+                            <div class="prettybuttons rgbuttons2" Id="rgplus1">+</div>
+                            <div class="prettybuttons rgbuttons1" Id="rgplus9">+++</div></div><br />
+
+                    <p id="rgtimeleftp"></p>
+                    <progress id="rgbar" max="180" value="0"></progress> <br >
+                    Activate the Reversed Generator (RG) to increase your progress gain for some time! Select how much energy you want to pay and then click the button to activate it.<br>
+                    
+                    <div><img src="up/up_token_rg.png" alt="RG token" width="10%"><span id="rgtokendisplay" class="stat_pr">0</span></div>
+                    <button class="prettybuttons" Id="usergbutton">Use RG token!</button>
+                    Use RG tokens to get your highest RG boost for 3 minutes! (Stackable)
+            </FlexBox>
+                </div>
+            
+        
+    </div>
+    </div>
+</div>

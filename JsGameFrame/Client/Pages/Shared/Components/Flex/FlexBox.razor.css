@@ -1,0 +1,23 @@
+﻿div {
+    display: flex;
+    flex-direction: column;
+    background-color: #bb9457 /*#C70039 #6c03bd*/;
+    border-radius: 8px;
+    margin: 5px;
+    padding: 4px;
+    color: black;
+    border: 3px solid black;
+}
+
+.centerX{
+    align-items: center;
+    text-align: center;
+}
+
+.centerY{
+    justify-content: center;
+}
+
+.spaceY{
+    justify-content: space-around;
+}

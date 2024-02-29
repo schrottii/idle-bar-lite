@@ -1,0 +1,15 @@
+﻿@namespace Idlebar.Client.Pages
+
+<label id="@BoxId" class="switch">
+    <input id="@InputId" type="checkbox">
+    <span class="slider round"></span>
+</label>
+
+@code{
+    [Parameter]
+    public string BoxId { get; set; } = Guid.NewGuid().ToString().Substring(0, 7);
+
+    [Parameter]
+    public string InputId { get; set; } = Guid.NewGuid().ToString().Substring(0, 7);
+}
+

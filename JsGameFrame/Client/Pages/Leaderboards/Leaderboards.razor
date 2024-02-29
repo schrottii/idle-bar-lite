@@ -1,0 +1,199 @@
+﻿@namespace Idlebar.Client.Pages
+@inherits PageBase
+@inject HttpClient Client
+@inject NavigationManager NavManager
+
+<div class="@Class">
+    <NavBar Color="#bb9457">
+        <NavButton TabId="0" CurrentTab="CurrentTab" OnSelect="UpdateTab" ActiveClass="lbnavcolor">
+            @GetRessource(0)
+        </NavButton>
+        <NavButton TabId="1" CurrentTab="CurrentTab" OnSelect="UpdateTab" ActiveClass="lbnavcolor">
+            @GetRessource(1)
+        </NavButton>
+        <NavButton TabId="2" CurrentTab="CurrentTab" OnSelect="UpdateTab" ActiveClass="lbnavcolor">
+            @GetRessource(2)
+        </NavButton>
+        <NavButton TabId="3" CurrentTab="CurrentTab" OnSelect="UpdateTab" ActiveClass="lbnavcolor">
+            @GetRessource(3)
+        </NavButton>
+    </NavBar>
+
+    <table width="100%" cellpadding="5">
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Joined At</th>
+            <th>@GetRessource(CurrentTab)</th>
+        </tr>
+
+        @if (GetPage(CurrentTab, Pages[CurrentTab]).Length > 0)
+        {
+            @foreach (var player in GetPage(CurrentTab, Pages[CurrentTab]))
+            {
+                <tr id="rank@(Rank++)">
+                    <td>@(Rank)</td>
+                    <td>@player.Name</td>
+                    <td>@player.CreatedAt.LocalDateTime.ToShortDateString()</td>
+                    <td>@FormatValue(player.Value)</td>
+                </tr>
+            }
+        }
+    </table>
+
+    @if (GetPage(CurrentTab, Pages[CurrentTab]).Length == 0)
+    {
+        <p>Could not Retrieve Data!</p>
+    }
+
+    <button class="@(HasLastPage ? "" : "g_hidden")" id="lastpagebtn" @onclick="LastPage">
+        <i class="fas fa-backward"></i>
+    </button>
+    <button id="refreshbtn" @onclick="() => UpdateCurrentBoardAsync()">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+    <button class="@(HasNextPage ? "" : "g_hidden")" id="nextpagebtn" @onclick="() => NextPageAsync()">
+        <i class="fas fa-forward"></i>
+    </button>
+</div>
+
+@code{
+    private const int PageSize = 10;
+
+    private LeaderboardPlayer[][] LeaderboardPlayers { get; set; }
+    private int[] Pages { get; set; }
+    private int CurrentTab { get; set; }
+    private int Rank { get; set; }
+
+    private void UpdateTab(int tab)
+    {
+        CurrentTab = tab;
+        StateHasChanged();
+    }
+
+    private string GetRessource(int tab)
+        => tab switch
+        {
+            0 => "Max Level",
+            1 => "Total Tiers",
+            2 => "Energy",
+            3 => "Click Time",
+            _ => "Unknown"
+        };
+
+    private string FormatValue(object value)
+    {
+        if (CurrentTab == 0)
+        {
+            return value.ToString();
+        }
+        else if (CurrentTab == 1)
+        {
+            return value.ToString();
+        }
+        else if (CurrentTab == 2)
+        {
+            return Math.Round(double.Parse(value.ToString(), System.Globalization.CultureInfo.InvariantCulture)).ToString();
+        }
+        else
+        {
+            double boostMillis = double.Parse(value.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            if (boostMillis < 60000)
+            {
+                return $"{Math.Round(boostMillis / 1000)} secs";
+            }
+            if (boostMillis < 3600000)
+            {
+                return $"{Math.Round(boostMillis / 60000, 1)} mins";
+            }
+            if (boostMillis < 86400000)
+            {
+                return $"{Math.Round(boostMillis / 3600000, 2)} hours";
+            }
+            return $"{Math.Round(boostMillis / 86400000, 3)} days";
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Pages = new int[4];
+        LeaderboardPlayers = new LeaderboardPlayer[4][];
+        for (int i = 0; i < 4; i++)
+        {
+            LeaderboardPlayers[i] = new LeaderboardPlayer[0];
+            await LoadPageAsync(i, 0);
+        }
+    }
+
+    private async Task NextPageAsync()
+    {
+        Pages[CurrentTab]++;
+        await LoadPageAsync(CurrentTab, Pages[CurrentTab]);
+        StateHasChanged();
+    }
+    private void LastPage()
+    {
+        Pages[CurrentTab]--;
+        StateHasChanged();
+    }
+
+    private async Task UpdateCurrentBoardAsync()
+    {
+        await UpdateLeaderboardAsync(CurrentTab, Pages[CurrentTab]);
+        StateHasChanged();
+    }
+
+    private LeaderboardPlayer[] GetPage(int tab, int page)
+    {
+        Rank = page * PageSize;
+        return LeaderboardPlayers[tab].AsMemory().Slice(page * PageSize).ToArray()
+            .Where(x => x != null).Take(10).ToArray();
+    }
+
+    private async Task LoadPageAsync(int tab, int page)
+    {
+        //Amount of pages available past start of requested Page
+        int pagesAvailable = (LeaderboardPlayers[tab].Length - page * PageSize) / PageSize;
+        //Loop if there are no / one pages available (there is always more loaded than needed to show / hide the nextpage btn)
+        for (int i = 1; i > pagesAvailable - 1; i--)
+        {
+            await UpdateLeaderboardAsync(tab, page + i);
+        }
+    }
+
+    private async Task UpdateLeaderboardAsync(int tab, int page)
+    {
+        int requiredLenght = page * PageSize + PageSize;
+        if (LeaderboardPlayers[tab].Length < requiredLenght)
+        {
+            var oldArr = LeaderboardPlayers[tab];
+            LeaderboardPlayers[tab] = new LeaderboardPlayer[requiredLenght];
+            oldArr.CopyTo(LeaderboardPlayers[tab].AsMemory());
+        }
+
+        var response = await Client.GetAsync($"{NavManager.BaseUri}lb/get/{tab}/{page}");
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        var players = await response.Content.ReadFromJsonAsync<LeaderboardPlayer[]>();
+
+        if (players == null)
+        {
+            return;
+        }
+        if (players.Length < 10)
+        {
+            var playersAlt = players;
+            players = new LeaderboardPlayer[10];
+            playersAlt.CopyTo(players, 0);
+        }
+
+        players.CopyTo(LeaderboardPlayers[tab], page * PageSize);
+    }
+
+    private bool HasNextPage => LeaderboardPlayers[CurrentTab].Where(x => x != null).Count() > Pages[CurrentTab] * PageSize + PageSize;
+    private bool HasLastPage => Pages[CurrentTab] > 0;
+}

@@ -1,0 +1,14 @@
+﻿a{
+    font-size: 48px;
+}
+
+.huge{
+    font-size: 10vmax;
+    color: darkred;
+}
+
+.close {
+    font-size: 48px;
+    color:darkred;
+    margin-left: 10vw;
+}
