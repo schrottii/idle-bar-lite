@@ -980,7 +980,7 @@ async function Handle_UpdateButton() {
 }
 //#endregion
 async function Handle_AutoSave() {
-    return false;
+    /*
     if (account.id == null) return;
 
     if (accountChanged) {
@@ -1005,6 +1005,7 @@ async function Handle_AutoSave() {
         autosave_checkbox.checked = false;
         autoSaveFails = 0;
     }
+    */
 }
 
 //#region Account Changes
@@ -1709,7 +1710,7 @@ function UI_UpdateQuestButton() {
 }
 
 function UI_UpdateQuestModal() {
-    return false;
+    /*
     for (i = 0; i < questSlots; i++) {
         var openQuest = openQuests[i];
 
@@ -1750,6 +1751,7 @@ function UI_UpdateQuestModal() {
             questClaimButtons[i].style.display = "none";
         }
     }
+    */
 }
 
 function UI_UpdateEnergy() {
@@ -1797,7 +1799,7 @@ function UI_UpdateLeaderboardExcluder() {
 }
 
 function UI_Update_RewardRoadDisplay() {
-    return false;
+    /*
     var cdisplay = "";
     for (i = 0; i < currentSeason.rewards.length; i++) {
         var reward = currentSeason.rewards[i];
@@ -1837,10 +1839,11 @@ function UI_Update_RewardRoadDisplay() {
     }
 
     rewardroadchtml.innerHTML = cdisplay;
+    */
 }
 
 function UI_UpdateCollection() {
-    return false;
+    /*
     trophy_bar.value = (sg.collectables.length / trophies.length) * 100;
 
     collectionhtml.innerHTML = "";
@@ -1848,10 +1851,11 @@ function UI_UpdateCollection() {
         var trophy = trophies[trophyId];
         collectionhtml.innerHTML += '<img class="collectionimg" src="tros/' + trophy.imageSrc + '.png" title="' + trophy.description + '">';
     });
+    */
 }
 
 function UI_UpdateRewardRoad() {
-    return false;
+    /*
     if (sg.maximumTier >= 30000) {
         rr_box.style.display = "block";
         rrp_bar.value = (sg.rewardRoadProgress / (200 + (sg.rewardRoadLevel * 50)) ) * 100;
@@ -1872,6 +1876,7 @@ function UI_UpdateRewardRoad() {
         rr_box.style.display = "none";
         rewardroadhtml.innerHTML = "Unlocked at tier 30,000!";
     }
+    */
 }
 
 function UI_UpdatePower() {
