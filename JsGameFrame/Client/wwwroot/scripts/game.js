@@ -854,6 +854,7 @@ function Handle_ProgressButton() {
     clickBoost = baseClickBoost + (sg.powerUpgrades[0] / 10)
 
     UI_UpdateProgressButtons();
+    Handle_MilestoneBar();
 
     nice()
 }
@@ -1313,7 +1314,7 @@ async function Save_NewSeason() {
     var howmuchdoiget = Calculate_RewardRoadEnergy();
     Save_AddEnergy(howmuchdoiget);
 
-    //... THEN remove the progress! Playwo, I blame you!
+    //... THEN remove the progress!
     sg.currentSeason = currentSeasonIndex;
     sg.rewardRoadProgress = 0;
     sg.rewardRoadLevel = 0;
