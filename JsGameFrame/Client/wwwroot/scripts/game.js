@@ -171,7 +171,7 @@ class SaveGame {
     }
      
     getenergypersec() {
-        return (this.energyUpgrades[0] + 1) * ((this.powerUpgrades[3] / 10) + 1) * 8 * enghack * energymultislider.value / 100;
+        return (this.energyUpgrades[0] + 1) * ((this.powerUpgrades[3] / 10) + 1) * 8 * energymultislider.value / 100;
     }
     getmaxenergypersec() {
         if (energymultislider != undefined) return (this.energyUpgrades[0] + 1) * ((this.powerUpgrades[3] / 10) + 1) * 8 * enghack * energymultislider.max / 100;
@@ -802,10 +802,11 @@ function Handle_NotationMenuKeyUp() {
 }
 
 async function Handle_UseCurrentTab() {
-    await WebAssembly_UpdateTabCode();
+    //await WebAssembly_UpdateTabCode();
 }
 
 function Handle_ClaimRewardRoad() {
+    /*
     if (sg.rewardRoadLevel <= sg.rewardRoadClaimed && sg.rewardRoadClaimed != 50) return;
     var reward = currentSeason.rewards[sg.rewardRoadClaimed];
 
@@ -819,6 +820,7 @@ function Handle_ClaimRewardRoad() {
     else if (!Game_CollectReward(reward, reward.id, RewardSource.Season)) {
         return;
     }
+    */
 }
 
 function Handle_FunButton() {
@@ -945,6 +947,8 @@ async function Handle_LoadButton() {
         saveCode = atob(saveCode);
         saveCode = JSON.parse(saveCode);
         sg.loadFromSaveGame(saveCode);
+
+        UI_FullUpdate();
     }
     catch {
         alert("False!");
@@ -1300,6 +1304,7 @@ function Save_AddPower(amount) {
 }
 
 async function Save_NewSeason() {
+    /*
     amountClaimed = sg.rewardRoadLevel - sg.rewardRoadClaimed;
     if (sg.rewardRoadLevel > sg.rewardRoadClaimed) {
         var lastseason = await WebAssembly_GetSeason(sg.currentSeason);
@@ -1323,6 +1328,7 @@ async function Save_NewSeason() {
     
     alert(`The last reward road season ended! ${amountClaimed} rewards have been claimed. Have fun with the new one :D`);
     alert(`You also got ` + shortnum(howmuchdoiget) + ` energy from your leftover RRP!`);
+    */
 }
 //#endregion
 
@@ -2199,8 +2205,8 @@ async function WebAssembly_LoadReward(rewardCode) {
 //#endregion
 
 function reset() { //prestige
-    UI_HideResetModal();
-    if (/*(sg.multi * 2 < calculate("RESET")) || ((sg.multi > 49) && (*/Game_GetResetMulti() > sg.multi)/*))*/ {
+    //UI_HideResetModal();
+    if (/*(sg.multi * 2 < calculate("RESET")) || ((sg.multi > 49) && (*/Game_GetResetMulti() > sg.multi) {
         var newmulti = Game_GetResetMulti();
         sg.reset(newmulti);
     }

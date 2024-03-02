@@ -35,18 +35,18 @@
         <FlexBox Stretch="false" SpaceY="true" Id="enctrlbox" class="colorflex">
 
             <div>
-                <img src="up/up_energy.png" alt="Energy" width="5%">
+                <img src="JsGameFrame/Client/wwwroot/up/up_energy.png" alt="Energy" width="5%">
                 <span id="text_energy" class="stat_pr"></span>
                 <span id="text_energypersec" class="stat_pr"></span>
                 <br>
                 Keep the slider at max. for full energy production!
                 <br> It goes down automatically after some time
             </div>
-            <RangeSlider Max="(int)(Constants.MaxSliderMultiplier * 100)" Min="10" Initial="50" BoxId="enmultibox" InputId="enmultislider" />
+            <input type="range" max="100" min="10" value="50" BoxId="enmultibox" id="enmultislider" />
         </FlexBox>
 
         <FlexBox Stretch="false" SpaceY="true" Id="poctrlbox" class="colorflex">
-            <div><img src="up/up_power.png" alt="Power" width="10%" align="center"><span id="text_power" class="stat_pr" align="center">0</span></div>
+            <div><img src="JsGameFrame/Client/wwwroot/up/up_power.png" alt="Power" width="10%" align="center"><span id="text_power" class="stat_pr" align="center">0</span></div>
             <span id="power_text"></span>
         </FlexBox>
 
@@ -91,6 +91,7 @@
                 <span id="autobuy5">0</span>
                 <button id="autobuyb5" class="prettybuttons">Change</button>
             </div>
+            <br />
 
         </FlexBox>
     </div>
@@ -127,14 +128,14 @@
             </div>
         </FlexBox> -->
 
-        <FlexBox Stretch="false" SpaceY="true" class="colorflex">
+        <div>
             <h2>Reset</h2>
-            <img src="up/up_reset.png" alt="Reset" width="64px" id="btn_img_reset">
-            <button id="btn_reset" class="resetbutton">
+            <img src="JsGameFrame/Client/wwwroot/up/up_reset.png" alt="Reset" width="64px" id="btn_img_reset">
+            <button id="btn_reset" class="resetbutton" onclick="reset()">
                 RESET
             </button>
             <br>
-        </FlexBox>
+        </div>
 
         <div>
 
@@ -144,18 +145,17 @@
                     <img class="limitedsize" src="reversedgenerator.png" alt="Reversed Generator">
                     <button id="enpowdisplay" class="prettybuttons">Click to activate the Reversed Generator 0</button><br />
 
-                    <div class="half">
                         <div class="prettybuttons rgbuttons1" Id="rgminus9">---</div>
                         <div class="prettybuttons rgbuttons2" Id="rgminus1">-</div>
                         <div class="prettybuttons rgbuttons2" Id="rgplus1">+</div>
                         <div class="prettybuttons rgbuttons1" Id="rgplus9">+++</div>
-                    </div><br />
+                    <br />
 
                     <p id="rgtimeleftp"></p>
                     <progress id="rgbar" max="180" value="0"></progress> <br>
                     Activate the Reversed Generator (RG) to increase your progress gain for some time! Select how much energy you want to pay and then click the button to activate it.<br>
 
-                    <div><img src="up/up_token_rg.png" alt="RG token" width="10%"><span id="rgtokendisplay" class="stat_pr">0</span></div>
+                    <div><img src="JsGameFrame/Client/wwwroot/up/up_token_rg.png" alt="RG token" width="64px"><span id="rgtokendisplay" class="stat_pr">0</span></div>
                     <button class="prettybuttons" Id="usergbutton">Use RG token!</button>
                     Use RG tokens to get your highest RG boost for 3 minutes! (Stackable)
                 </FlexBox>
@@ -190,7 +190,7 @@
         </FlexBox>
         <FlexBox Size="550px" Id="enupgbox">
             <div>
-                <img src="up/up_energy.png" alt="Energy" width="64px">
+                <img src="JsGameFrame/Client/wwwroot/up/up_energy.png" alt="Energy" width="64px">
                 Energy Upgrades
             </div>
             <span id="tabvenergy" class="stat_pr">Unlocked at tier 10k</span>
@@ -202,7 +202,7 @@
         </FlexBox>
         <FlexBox Size="550px" Id="pwupgbox">
             <div>
-                <img src="up/up_power.png" alt="Power" width="64px">
+                <img src="JsGameFrame/Client/wwwroot/up/up_power.png" alt="Power" width="64px">
                 Power Upgrades
             </div>
             <span id="tabtext_power" class="stat_pr black">Unlocked at tier 40k</span>
@@ -214,7 +214,7 @@
         </FlexBox>
         <FlexBox Size="550px" Id="auupgbox">
             <div>
-                <img src="up/up_power.png" alt="Power" width="64px">
+                <img src="JsGameFrame/Client/wwwroot/up/up_power.png" alt="Power" width="64px">
                 Autobuy Upgrades
             </div>
 
@@ -239,6 +239,7 @@
             <h1>Settings</h1>
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Load / Update</h2>
+                Make sure to save the game before leaving! <br />
                 <div>
                     <button id="loadbut" class="prettybuttons">
                         <h3>Load Local Code</h3>
@@ -248,11 +249,13 @@
                     </button>
                 </div>
             </FlexBox>
-            <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
-                <h2>Autosave</h2>
-                <p>Auto save will save your game every few seconds while active (blue)</p>
-                <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
-            </FlexBox>
+            <!--
+    <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
+        <h2>Autosave</h2>
+        <p>Auto save will save your game every few seconds while active (blue)</p>
+        <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
+    </FlexBox>
+        -->
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Notations</h2>
                 <div>
@@ -265,7 +268,7 @@
 
                     <div class="dropdown">
                         <button id="ntmenu" class="dropbtn">
-                            <img src="up/up_searchicon.png" width="15%">Select
+                            <img src="JsGameFrame/Client/wwwroot/up/up_searchicon.png" width="15%">Select
                         </button>
                         <div id="myDropdown" class="dropdown-content">
                             <input type="text" placeholder="Search.." id="myInput" />
@@ -290,19 +293,19 @@
                 <span id="prevnothtml"></span>
             </FlexBox>
             <!-- <FlexBox Id="rewardcodesettings" Stretch="false" Size="300px" class="colorflex">
-            <h2>Reward Codes</h2>
-            Reward codes can be redeemed for rewards (each code only once)!
-            <button id="codebutton" class="prettybuttons">
-                Redeem a reward code
-            </button>
-        </FlexBox>
-        <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
-            <h2>Account</h2>
-            <p>Username</p>
-            <input id="nameinput" type="text" placeholder="IncreadibleName" />
-            <p>Private Account? <small>(Hide on LBs)</small></p>
-            <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
-        </FlexBox> -->
+        <h2>Reward Codes</h2>
+        Reward codes can be redeemed for rewards (each code only once)!
+        <button id="codebutton" class="prettybuttons">
+            Redeem a reward code
+        </button>
+    </FlexBox>
+    <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
+        <h2>Account</h2>
+        <p>Username</p>
+        <input id="nameinput" type="text" placeholder="IncreadibleName" />
+        <p>Private Account? <small>(Hide on LBs)</small></p>
+        <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
+    </FlexBox> -->
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Color Reset</h2><br />
                 <small> Fun button trolled you again, huh? </small>
@@ -396,6 +399,7 @@
         <br /><br />
     </div>
         -->
+        <br />
         <span id="tabgameversionid">0</span>
     </div>
 
@@ -474,11 +478,7 @@
             </FlexBox> <br />
 
             <FlexBox Stretch="false" Size="300px" class="colorflex">
-                <p>Designed, developed and managed by <br /><a href="https://discord.gg/3T4CBmh" target="_blank">frankneurhein</a> based on an old project by <a href="https://veprogames.github.io/" target="_blank">Vepro</a></p>
-            </FlexBox>
-
-            <FlexBox Stretch="false" Size="300px" class="colorflex">
-                <p>Icons provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+                <p>Designed, developed and managed by <br /><a href="https://discord.gg/CbBeJXKUrk" target="_blank">Schrottii</a> based on an old project by <a href="https://veprogames.github.io/" target="_blank">Vepro</a></p>
             </FlexBox>
 
         </FlexArea>
@@ -490,7 +490,7 @@
             </FlexBox><br />
 
             <FlexBox Stretch="false" Size="300px" class="colorflex">
-                <i class="fab fa-discord" /> <br /> <b><a href="https://discord.gg/3T4CBmh" target="_blank">Join my Server</a></b> <br /> The most active Idle Bar community <br /> Cool people to hang out with <br /> including the developer
+                <i class="fab fa-discord" /> <br /> <b><a href="https://discord.gg/CbBeJXKUrk" target="_blank">Join my Server</a></b> <br /> The most active Idle Bar community <br /> Cool people to hang out with <br /> including the developer
             </FlexBox>
 
             <FlexBox Stretch="false" Size="300px" class="colorflex">
