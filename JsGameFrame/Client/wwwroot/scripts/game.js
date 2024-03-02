@@ -917,6 +917,7 @@ function Handle_ResetColorButton() {
 }
 
 async function Handle_RewardCodeButton() {
+    /*
     var rewardCode = prompt("Please enter a valid code!");
 
     if (rewardCode == null || rewardCode == "") {
@@ -937,6 +938,7 @@ async function Handle_RewardCodeButton() {
     if (!Game_CollectReward(reward, reward.id, RewardSource.Code)) {
         return;
     }
+    */
 }
 
 async function Handle_LoadButton(isCache=false) {
@@ -970,7 +972,11 @@ async function Handle_UpdateButton() {
     code = btoa(code);
     navigator.clipboard.writeText(code);
 
+    // cache
     localStorage.setItem("IDLEBARLITE", code);
+
+    // field (for chrome mobile)
+    putcodehere.value = code;
 
     alert("Your local code has been copied to your clipboard and saved in cache!")
 
@@ -2354,6 +2360,7 @@ function Initialize() {
     rg_plus9 = document.getElementById("rgplus9");
     rg_minus1 = document.getElementById("rgminus1");
     rg_minus9 = document.getElementById("rgminus9");
+    putcodehere = document.getElementById("putcodehere");
 
     // General vars such as tiers
     text_p = document.getElementById("text_progress");
