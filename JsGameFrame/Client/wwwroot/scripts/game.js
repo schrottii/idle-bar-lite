@@ -939,8 +939,8 @@ async function Handle_RewardCodeButton() {
     }
 }
 
-async function Handle_LoadButton() {
-    var saveCode = prompt("Please enter your Local Code");
+async function Handle_LoadButton(isCache=false) {
+    var saveCode = isCache ? localStorage.getItem("IDLEBARLITE") : prompt("Please enter your Local Code");
     // var saveCode = prompt("Please enter your SaveCode\nYou get a SaveCode by saving your game!", "SaveCode");
 
     try {
@@ -970,7 +970,9 @@ async function Handle_UpdateButton() {
     code = btoa(code);
     navigator.clipboard.writeText(code);
 
-    alert("Your local code has been copied to your clipboard!")
+    localStorage.setItem("IDLEBARLITE", code);
+
+    alert("Your local code has been copied to your clipboard and saved in cache!")
 
     /*
     var success = await WebAssembly_UpdateGame(true);
@@ -2326,7 +2328,7 @@ function Initialize() {
     if ( leaderboxexcluder != undefined) leaderboxexcluder.addEventListener("change", Handle_LeaderboardExcluderChange);
 
     colorresetbtn = document.getElementById("colorresetbtn");
-    tabactivatorbtn = document.getElementById("tabactivatorbtn");
+    //tabactivatorbtn = document.getElementById("tabactivatorbtn");
     uiupdatebtn = document.getElementById("uiupdatebtn");
 
     // Bars
@@ -2494,6 +2496,10 @@ function Initialize() {
     funfun = document.getElementById("funbutton");
     powertext = document.getElementById("power_text");
 
+
+    // load from cache
+    if (localStorage.getItem("IDLEBARLITE") != undefined) Handle_LoadButton(true);
+
     isinit = true;
 }
 function RegisterEvents() {
@@ -2506,7 +2512,7 @@ function RegisterEvents() {
     //nameinput.addEventListener("change", Handle_NameChange);
     colorresetbtn.addEventListener("click", Handle_ResetColorButton);
     uiupdatebtn.addEventListener("click", UI_FullUpdate);
-    tabactivatorbtn.addEventListener("click", Handle_UseCurrentTab);
+    //tabactivatorbtn.addEventListener("click", Handle_UseCurrentTab);
 
     ntback.addEventListener("click", ChangeNotationBack);
     ntforward.addEventListener("click", ChangeNotation);

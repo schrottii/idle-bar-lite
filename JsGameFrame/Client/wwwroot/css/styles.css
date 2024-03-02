@@ -124,13 +124,14 @@
 }
 
 .rgbuttons1 { /* +++ and --- */
-    padding: 2% 3%;
+    font-size: 160%;
     font-weight: bold;
+    max-height: 40px;
 }
 
 .rgbuttons2 { /* + and - */
-    padding: 3.5% 3%;
     font-size: 120%;
+    max-height: 40px;
 }
 
     /* Bar 1 */
