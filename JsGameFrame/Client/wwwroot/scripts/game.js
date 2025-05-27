@@ -942,12 +942,14 @@ async function Handle_RewardCodeButton() {
 }
 
 async function Handle_LoadButton(isCache=false) {
+    console.log(localStorage.getItem("IDLEBARLITE"))
     var saveCode = isCache ? localStorage.getItem("IDLEBARLITE") : prompt("Please enter your Local Code");
     // var saveCode = prompt("Please enter your SaveCode\nYou get a SaveCode by saving your game!", "SaveCode");
 
     try {
         saveCode = atob(saveCode);
         saveCode = JSON.parse(saveCode);
+        console.log(saveCode)
         sg.loadFromSaveGame(saveCode);
 
         UI_FullUpdate();
@@ -965,12 +967,12 @@ async function Handle_LoadButton(isCache=false) {
     */
 }
 
-async function Handle_UpdateButton() {
+async function Handle_UpdateButton(auto = false) {
     // Save Local Code
     var code = sg;
     code = JSON.stringify(sg);
     code = btoa(code);
-    navigator.clipboard.writeText(code);
+    if (!auto) navigator.clipboard.writeText(code);
 
     // cache
     localStorage.setItem("IDLEBARLITE", code);
@@ -978,7 +980,7 @@ async function Handle_UpdateButton() {
     // field (for chrome mobile)
     putcodehere.value = code;
 
-    alert("Your local code has been copied to your clipboard and saved in cache!")
+    if (!auto) alert("Your local code has been copied to your clipboard and saved in cache!")
 
     /*
     var success = await WebAssembly_UpdateGame(true);
@@ -991,6 +993,9 @@ async function Handle_UpdateButton() {
         await WebAssembly_UpdateAccount(true);
     }*/
 }
+
+setInterval("Handle_UpdateButton(true)", 5000);
+
 //#endregion
 async function Handle_AutoSave() {
     /*
@@ -2282,6 +2287,7 @@ function SetConfig() {
 }
 //Set the SaveGame (Can be called multiple times during execution!)
 async function SetSaveGame(saveData) {
+    /*
     account = saveData.account;
 
     sg = new SaveGame();
@@ -2291,6 +2297,7 @@ async function SetSaveGame(saveData) {
 
     Game_HardReset();
     await Save_MigrateSave();
+    */
 }
 
 var isinit = false;
