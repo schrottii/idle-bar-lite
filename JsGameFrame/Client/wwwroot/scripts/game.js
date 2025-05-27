@@ -383,10 +383,11 @@ function Ban() {
 }
 
 function cheatcheck() {
-
+    /*
     if (sg.rewardRoadClaimed > sg.rewardRoadLevel + 1 || sg.rewardRoadLevel > 51 || sg.level > 2500 || sg.ppshack > 3 || sg.maximumLevel > 2500 || sg.enhack > 2 || (sg.energy > sg.totalEnergy * 2 && sg.totalEnergy > 10000000)) {
         Ban();
     }
+    */
 }
 
 function UseRGToken() {
@@ -942,14 +943,15 @@ async function Handle_RewardCodeButton() {
 }
 
 async function Handle_LoadButton(isCache=false) {
-    console.log(localStorage.getItem("IDLEBARLITE"))
+    //console.log(localStorage.getItem("IDLEBARLITE"))
     var saveCode = isCache ? localStorage.getItem("IDLEBARLITE") : prompt("Please enter your Local Code");
     // var saveCode = prompt("Please enter your SaveCode\nYou get a SaveCode by saving your game!", "SaveCode");
 
     try {
         saveCode = atob(saveCode);
         saveCode = JSON.parse(saveCode);
-        console.log(saveCode)
+        
+        //console.log(saveCode)
         sg.loadFromSaveGame(saveCode);
 
         UI_FullUpdate();
@@ -1278,20 +1280,20 @@ async function Save_MigrateSave() {
     }
 }
 
-function Save_AddUpgrade(type, index, amount) {
+function Save_AddUpgrade(type, i, amount) {
     nice()
     switch (type) {
         case UpgradeType.Level:
-            sg.levelUpgrades[index] += amount;
+            if (sg.tier >= unlock[i]) sg.levelUpgrades[i] += amount;
             break;
         case UpgradeType.Energy:
-            sg.energyUpgrades[index] += amount;
+            if (sg.tier >= 10000 + 2000 * i) sg.energyUpgrades[i] += amount;
             break;
         case UpgradeType.Power:
-            sg.powerUpgrades[index] += amount;
+            if (sg.tier >= 40000 + 2500 * i) sg.powerUpgrades[i] += amount;
             break;
         case UpgradeType.Autobuy:
-            sg.autobuyUpgrades[index] += amount;
+            if (sg.tier >= 200000 + 50000 * i) sg.autobuyUpgrades[i] += amount;
             break;
     }
 }
@@ -1498,7 +1500,7 @@ function Game_TryAddUpgrade(type, index) {
         var cost = Get_CurrentUpgradeCost(type, index);
         switch (type) {
             case UpgradeType.Level:
-                if (sg.level < cost) {
+                if (sg.level < cost || sg.tier < unlock[index]) {
                     UpgradesUI_UpdateLevelUpgrades();
                     return false;
                 }
@@ -1511,7 +1513,7 @@ function Game_TryAddUpgrade(type, index) {
 
                 continue;
             case UpgradeType.Energy:
-                if (sg.energy < cost) {
+                if (sg.energy < cost || sg.tier < 10000 + 2000 * index) {
                     UpgradesUI_UpdateEnergyUpgrades();
                     return false;
                 }
@@ -1523,7 +1525,7 @@ function Game_TryAddUpgrade(type, index) {
 
                 continue;
             case UpgradeType.Power:
-                if (sg.power < cost) {
+                if (sg.power < cost || sg.tier < 40000 + 2500 * index) {
                     UpgradesUI_UpdatePowerUpgrades();
                     return false;
                 }
@@ -2340,7 +2342,7 @@ function Initialize() {
     leaderboxexcluder = document.getElementById("leaderboxexcluder");
     if ( leaderboxexcluder != undefined) leaderboxexcluder.addEventListener("change", Handle_LeaderboardExcluderChange);
 
-    colorresetbtn = document.getElementById("colorresetbtn");
+    //colorresetbtn = document.getElementById("colorresetbtn");
     //tabactivatorbtn = document.getElementById("tabactivatorbtn");
     uiupdatebtn = document.getElementById("uiupdatebtn");
 
@@ -2524,7 +2526,7 @@ function RegisterEvents() {
 
     //redeemcode.addEventListener("click", Handle_RewardCodeButton);
     //nameinput.addEventListener("change", Handle_NameChange);
-    colorresetbtn.addEventListener("click", Handle_ResetColorButton);
+    //colorresetbtn.addEventListener("click", Handle_ResetColorButton);
     uiupdatebtn.addEventListener("click", UI_FullUpdate);
     //tabactivatorbtn.addEventListener("click", Handle_UseCurrentTab);
 
