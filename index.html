@@ -23,12 +23,11 @@
                 <div>
                     <span id="text_level" class="stat_pr">0</span>
                     <span id="tier_level" class="stat_pr">0</span>
-
                 </div>
             </div>
             <br>
 
-            <button id="progressButton1" class="buttons" onclick="Handle_ProgressButton()" style="max-width: 40%; height: 96px">
+            <button id="progressButton1" class="buttons" onclick="Handle_ProgressButton()" style="max-width: 40%; height: 96px; margin: auto;">
                 <i class="fas fa-plus-circle" /> <b>Click!</b>
             </button>
         </FlexBox>
@@ -56,7 +55,8 @@
             Progress to Level Bar: <br> <progress id="pbar" max="100" value="0"></progress>
             <br>
             Tiers to Milestone Bar: <br> <progress id="pbar2" max="100" value="0"></progress>
-            <br> <span id="text_progress" class="stat_pr">0</span><br>
+            <br>
+            <span id="text_progress" class="stat_pr" style="width: 60%;">0</span><br>
             <span id="nextMilestoneBarGoal" class="stat_pr">0</span>
         </FlexBox>
 
@@ -145,10 +145,10 @@
                     <img class="limitedsize" src="reversedgenerator.png" alt="Reversed Generator">
                     <button id="enpowdisplay" class="prettybuttons">Click to activate the Reversed Generator 0</button><br />
 
-                        <div class="prettybuttons rgbuttons1" Id="rgminus9">---</div>
-                        <div class="prettybuttons rgbuttons2" Id="rgminus1">-</div>
-                        <div class="prettybuttons rgbuttons2" Id="rgplus1">+</div>
-                        <div class="prettybuttons rgbuttons1" Id="rgplus9">+++</div>
+                    <div class="prettybuttons rgbuttons1" Id="rgminus9">---</div>
+                    <div class="prettybuttons rgbuttons2" Id="rgminus1">-</div>
+                    <div class="prettybuttons rgbuttons2" Id="rgplus1">+</div>
+                    <div class="prettybuttons rgbuttons1" Id="rgplus9">+++</div>
                     <br />
 
                     <p id="rgtimeleftp"></p>
@@ -179,7 +179,7 @@
 
     <FlexArea Id="upgradesbox" Center="true">
         <h1>Upgrades</h1>
-        <FlexBox Size="550px" Id="lvlupgbox">
+        <FlexBox Size="550px" Id="lvlupgbox" class="colorflex">
             Level Upgrades
             <div><span id="tabtext_level" class="stat_pr black">0</span><span id="tabtext_tier" class="stat_pr black">0</span></div>
             <button id="lvlupg_b_0" class="buttons"><p id="lvlupg_p_0">e</p></button>
@@ -239,7 +239,7 @@
             <h1>Settings</h1>
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Load / Update</h2>
-                Make sure to save the game before leaving! There is no auto save, but it gets cached when you save. <br />
+                Make sure to save the game before leaving!  <br />
                 <div>
                     <button id="loadbut" class="prettybuttons">
                         <h3>Load Local Code</h3>
@@ -254,12 +254,12 @@
                 </div>
             </FlexBox>
             <!--
-    <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
-        <h2>Autosave</h2>
-        <p>Auto save will save your game every few seconds while active (blue)</p>
-        <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
-    </FlexBox>
-        -->
+            <FlexBox Id="autosavesettings" Stretch="false" Size="300px" class="colorflex">
+                <h2>Autosave</h2>
+                <p>Auto save will save your game every few seconds while active (blue)</p>
+                <CheckBoxSlider BoxId="autosavediv" InputId="autosavecheckbox" />
+            </FlexBox>
+                -->
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Notations</h2>
                 <div>
@@ -297,19 +297,19 @@
                 <span id="prevnothtml"></span>
             </FlexBox>
             <!-- <FlexBox Id="rewardcodesettings" Stretch="false" Size="300px" class="colorflex">
-        <h2>Reward Codes</h2>
-        Reward codes can be redeemed for rewards (each code only once)!
-        <button id="codebutton" class="prettybuttons">
-            Redeem a reward code
-        </button>
-    </FlexBox>
-    <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
-        <h2>Account</h2>
-        <p>Username</p>
-        <input id="nameinput" type="text" placeholder="IncreadibleName" />
-        <p>Private Account? <small>(Hide on LBs)</small></p>
-        <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
-    </FlexBox> -->
+                <h2>Reward Codes</h2>
+                Reward codes can be redeemed for rewards (each code only once)!
+                <button id="codebutton" class="prettybuttons">
+                    Redeem a reward code
+                </button>
+            </FlexBox>
+            <FlexBox Id="leaderboardsettings" Stretch="false" Size="300px" class="colorflex">
+                <h2>Account</h2>
+                <p>Username</p>
+                <input id="nameinput" type="text" placeholder="IncreadibleName" />
+                <p>Private Account? <small>(Hide on LBs)</small></p>
+                <CheckBoxSlider InputId="leaderboxexcluder"></CheckBoxSlider>
+            </FlexBox> -->
             <FlexBox Stretch="false" Size="300px" class="colorflex">
                 <h2>Color Reset</h2><br />
                 <small> Fun button trolled you again, huh? </small>
@@ -343,28 +343,16 @@
             <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Tiers</h2>
                 <span id="stattotaltiers" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Energy</h2>
                 <span id="stattotalenergy" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Fun Button Clicks</h2>
                 <span id="statfunbuttonclicks" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Levels</h2>
                 <span id="stattotallevels" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Power</h2>
                 <span id="stattotalpower" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Click Time</h2>
                 <span id="stattotalclicktime" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Total Quests Done</h2>
                 <span id="stattotalquestsdone" class="stat_pr">0</span>
             </FlexBox>
@@ -373,36 +361,30 @@
             <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Highest Level</h2>
                 <span id="stathighestlevel" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Highest Tier</h2>
                 <span id="stathighesttier" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Trophies</h2>
                 <span id="stattotaltrophies" class="stat_pr">0</span>
-            </FlexBox>
-            <FlexBox Stretch="false" Size="200px" class="colorflex">
                 <h2>Milestones</h2>
                 <span id="statmilestones" class="stat_pr">0</span>
             </FlexBox>
         </FlexArea>
 
         <!--
-    <div align="center">
-        <br />
-        <hr>
-        <h1>Collection</h1>
-        You can get trophies at the Reward Road <br />
-        Hover over them to read their descriptions! <br />
-        <small>(Hold on mobile)</small>
-        <span id="collection" class="stat_pr">RR</span>
+        <div align="center">
+            <br />
+            <hr>
+            <h1>Collection</h1>
+            You can get trophies at the Reward Road <br />
+            Hover over them to read their descriptions! <br />
+            <small>(Hold on mobile)</small>
+            <span id="collection" class="stat_pr">RR</span>
 
-        <br /><progress id="tbar" max="100" value="0"></progress>
-        <br />
-        <br /><br />
-    </div>
-        -->
+            <br /><progress id="tbar" max="100" value="0"></progress>
+            <br />
+            <br /><br />
+        </div>
+            -->
         <br />
         <span id="tabgameversionid">0</span>
     </div>
@@ -431,11 +413,10 @@
         </FlexBox><FlexBox Stretch="true" class="colorflex">
 
             <h3>Energy</h3>
-            <span id="help_energy"></span>
-        </FlexBox><FlexBox Stretch="true" class="colorflex">
+            Energy is unlocked at 10k tiers. Energy is earned automatically and can be spent on 5 upgrades with different effects. The energy slider affects the energy production. Try to always keep it on the right side. It exists to prevent AFK energy farming being too strong.
 
             <h3>Power</h3>
-            <span id="help_power"></span>
+            Power is unlocked at 40k tiers. Power is earned from several things and can be spent on 5 upgrades that also cost some levels.
         </FlexBox>
     </FlexArea><FlexArea Center="true">
         <FlexBox Stretch="true" class="colorflex">
@@ -445,18 +426,15 @@
             <h3>Reversed Generator</h3>
             The Reversed Generator is unlocked at 20k tiers. Energy can be converted to a temporary progress boost.
             RG tokens can be used to get the highest previously used boost for 180 seconds, they can be stacked.
-        </FlexBox><FlexBox Stretch="true" class="colorflex">
 
             <h3>Reward Road</h3>
             The Reward Road is a battle pass-like feature unlocked at 30k tiers. Reward Road Progress can be earned from several things.
             Further explanation at the Reward Road.
             The collection contains several trophies, which can be earned from codes and at the Reward Road. They are decoration.
-        </FlexBox><FlexBox Stretch="true" class="colorflex">
 
             <h3>Quests</h3>
             Quests are unlocked at 50k tiers. There's 5 quest slots, new quests will appear when saving.
             Each quest has a randomly selected thing that has to be done and a randomly selected reward of the same difficulty.
-        </FlexBox><FlexBox Stretch="true" class="colorflex">
 
             <h3>Common Abbreviations</h3>
             Some common abbreviations you may find in the patch notes or community: <br />

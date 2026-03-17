@@ -965,20 +965,22 @@ async function Handle_LoadButton(isCache=false) {
     */
 }
 
-async function Handle_UpdateButton() {
+function Handle_UpdateButton(auto = false) {
     // Save Local Code
     var code = sg;
     code = JSON.stringify(sg);
     code = btoa(code);
-    navigator.clipboard.writeText(code);
 
     // cache
     localStorage.setItem("IDLEBARLITE", code);
 
-    // field (for chrome mobile)
-    putcodehere.value = code;
+    if (!auto) {
+        // field (for chrome mobile)
+        putcodehere.value = code;
 
-    alert("Your local code has been copied to your clipboard and saved in cache!")
+        navigator.clipboard.writeText(code);
+        alert("Your local code has been copied to your clipboard and saved in cache!")
+    }
 
     /*
     var success = await WebAssembly_UpdateGame(true);
@@ -1929,6 +1931,8 @@ function UI_UpdateAutobuy() {
 }
 
 function UI_UpdateHelp() {
+    return false;
+    /*
     if (sg.maximumTier >= 10000) {
         help_energy.innerHTML = "Energy is unlocked at 10k tiers. Energy is earned automatically and can be spent on 5 upgrades with different effects." +
         "The energy slider affects the energy production. Try to always keep it on the right side. It exists to prevent AFK energy farming being too strong.";
@@ -1942,6 +1946,7 @@ function UI_UpdateHelp() {
     else {
         help_power.innerHTML = "";
     }
+    */
 }
 
 function UI_UpdateNews() {
@@ -2612,7 +2617,7 @@ function StartGame() {
     UI_FullUpdate();
     intervals.push(setInterval(Tick_Game, 1000 / fps));
     intervals.push(setInterval(cheatcheck, 1000));
-    intervals.push(setInterval(Handle_AutoSave, 10000));
+    intervals.push(setInterval("Handle_UpdateButton(true)", 10000));
     intervals.push(setInterval(UI_RandomizeFunButton, 5000));
 }
 function PauseGame() {
