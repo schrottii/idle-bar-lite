@@ -383,10 +383,11 @@ function Ban() {
 }
 
 function cheatcheck() {
-
+    /*
     if (sg.rewardRoadClaimed > sg.rewardRoadLevel + 1 || sg.rewardRoadLevel > 51 || sg.level > 2500 || sg.ppshack > 3 || sg.maximumLevel > 2500 || sg.enhack > 2 || (sg.energy > sg.totalEnergy * 2 && sg.totalEnergy > 10000000)) {
         Ban();
     }
+    */
 }
 
 function UseRGToken() {
@@ -942,12 +943,15 @@ async function Handle_RewardCodeButton() {
 }
 
 async function Handle_LoadButton(isCache=false) {
+    //console.log(localStorage.getItem("IDLEBARLITE"))
     var saveCode = isCache ? localStorage.getItem("IDLEBARLITE") : prompt("Please enter your Local Code");
     // var saveCode = prompt("Please enter your SaveCode\nYou get a SaveCode by saving your game!", "SaveCode");
 
     try {
         saveCode = atob(saveCode);
         saveCode = JSON.parse(saveCode);
+        
+        //console.log(saveCode)
         sg.loadFromSaveGame(saveCode);
 
         UI_FullUpdate();
@@ -965,22 +969,20 @@ async function Handle_LoadButton(isCache=false) {
     */
 }
 
-function Handle_UpdateButton(auto = false) {
+async function Handle_UpdateButton(auto = false) {
     // Save Local Code
     var code = sg;
     code = JSON.stringify(sg);
     code = btoa(code);
+    if (!auto) navigator.clipboard.writeText(code);
 
     // cache
     localStorage.setItem("IDLEBARLITE", code);
 
-    if (!auto) {
-        // field (for chrome mobile)
-        putcodehere.value = code;
+    // field (for chrome mobile)
+    putcodehere.value = code;
 
-        navigator.clipboard.writeText(code);
-        alert("Your local code has been copied to your clipboard and saved in cache!")
-    }
+    if (!auto) alert("Your local code has been copied to your clipboard and saved in cache!")
 
     /*
     var success = await WebAssembly_UpdateGame(true);
@@ -993,6 +995,9 @@ function Handle_UpdateButton(auto = false) {
         await WebAssembly_UpdateAccount(true);
     }*/
 }
+
+setInterval("Handle_UpdateButton(true)", 5000);
+
 //#endregion
 async function Handle_AutoSave() {
     /*
@@ -1275,20 +1280,20 @@ async function Save_MigrateSave() {
     }
 }
 
-function Save_AddUpgrade(type, index, amount) {
+function Save_AddUpgrade(type, i, amount) {
     nice()
     switch (type) {
         case UpgradeType.Level:
-            sg.levelUpgrades[index] += amount;
+            if (sg.tier >= unlock[i]) sg.levelUpgrades[i] += amount;
             break;
         case UpgradeType.Energy:
-            sg.energyUpgrades[index] += amount;
+            if (sg.tier >= 10000 + 2000 * i) sg.energyUpgrades[i] += amount;
             break;
         case UpgradeType.Power:
-            sg.powerUpgrades[index] += amount;
+            if (sg.tier >= 40000 + 2500 * i) sg.powerUpgrades[i] += amount;
             break;
         case UpgradeType.Autobuy:
-            sg.autobuyUpgrades[index] += amount;
+            if (sg.tier >= 200000 + 50000 * i) sg.autobuyUpgrades[i] += amount;
             break;
     }
 }
@@ -1495,7 +1500,7 @@ function Game_TryAddUpgrade(type, index) {
         var cost = Get_CurrentUpgradeCost(type, index);
         switch (type) {
             case UpgradeType.Level:
-                if (sg.level < cost) {
+                if (sg.level < cost || sg.tier < unlock[index]) {
                     UpgradesUI_UpdateLevelUpgrades();
                     return false;
                 }
@@ -1508,7 +1513,7 @@ function Game_TryAddUpgrade(type, index) {
 
                 continue;
             case UpgradeType.Energy:
-                if (sg.energy < cost) {
+                if (sg.energy < cost || sg.tier < 10000 + 2000 * index) {
                     UpgradesUI_UpdateEnergyUpgrades();
                     return false;
                 }
@@ -1520,7 +1525,7 @@ function Game_TryAddUpgrade(type, index) {
 
                 continue;
             case UpgradeType.Power:
-                if (sg.power < cost) {
+                if (sg.power < cost || sg.tier < 40000 + 2500 * index) {
                     UpgradesUI_UpdatePowerUpgrades();
                     return false;
                 }
@@ -1931,7 +1936,6 @@ function UI_UpdateAutobuy() {
 }
 
 function UI_UpdateHelp() {
-    return false;
     /*
     if (sg.maximumTier >= 10000) {
         help_energy.innerHTML = "Energy is unlocked at 10k tiers. Energy is earned automatically and can be spent on 5 upgrades with different effects." +
@@ -2287,6 +2291,7 @@ function SetConfig() {
 }
 //Set the SaveGame (Can be called multiple times during execution!)
 async function SetSaveGame(saveData) {
+    /*
     account = saveData.account;
 
     sg = new SaveGame();
@@ -2296,6 +2301,7 @@ async function SetSaveGame(saveData) {
 
     Game_HardReset();
     await Save_MigrateSave();
+    */
 }
 
 var isinit = false;
@@ -2338,7 +2344,7 @@ function Initialize() {
     leaderboxexcluder = document.getElementById("leaderboxexcluder");
     if ( leaderboxexcluder != undefined) leaderboxexcluder.addEventListener("change", Handle_LeaderboardExcluderChange);
 
-    colorresetbtn = document.getElementById("colorresetbtn");
+    //colorresetbtn = document.getElementById("colorresetbtn");
     //tabactivatorbtn = document.getElementById("tabactivatorbtn");
     uiupdatebtn = document.getElementById("uiupdatebtn");
 
@@ -2522,7 +2528,7 @@ function RegisterEvents() {
 
     //redeemcode.addEventListener("click", Handle_RewardCodeButton);
     //nameinput.addEventListener("change", Handle_NameChange);
-    colorresetbtn.addEventListener("click", Handle_ResetColorButton);
+    //colorresetbtn.addEventListener("click", Handle_ResetColorButton);
     uiupdatebtn.addEventListener("click", UI_FullUpdate);
     //tabactivatorbtn.addEventListener("click", Handle_UseCurrentTab);
 
@@ -2617,7 +2623,7 @@ function StartGame() {
     UI_FullUpdate();
     intervals.push(setInterval(Tick_Game, 1000 / fps));
     intervals.push(setInterval(cheatcheck, 1000));
-    intervals.push(setInterval("Handle_UpdateButton(true)", 10000));
+    intervals.push(setInterval(Handle_AutoSave, 10000));
     intervals.push(setInterval(UI_RandomizeFunButton, 5000));
 }
 function PauseGame() {
